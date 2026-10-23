@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="LinkedList Lab - Interactive DSA Visualizer for 'Add Two Numbers Represented by Linked Lists'. Learn linked list traversal, node-by-node addition, carry handling, and time/space complexity.">
+  <title>LinkedList Lab | Add Two Numbers Visualizer</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Background Ambient Glow Effects -->
+  <div class="ambient-glow glow-top-left" aria-hidden="true"></div>
+  <div class="ambient-glow glow-top-right" aria-hidden="true"></div>
+  <div class="ambient-glow glow-bottom-center" aria-hidden="true"></div>
+
+  <!-- Header Navigation -->
+  <header class="site-header" id="site-header">
+    <div class="header-container">
+      <a href="#home" class="brand-logo" aria-label="LinkedList Lab Home">
+        <div class="logo-icon-wrapper" aria-hidden="true">
+          <svg class="logo-svg" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="10" width="12" height="16" rx="4" fill="url(#logo-grad-1)" stroke="#38bdf8" stroke-width="1.5"/>
+            <circle cx="8" cy="18" r="3" fill="#ffffff"/>
+            <path d="M14 18H20M20 18L17 15M20 18L17 21" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="22" y="10" width="12" height="16" rx="4" fill="url(#logo-grad-2)" stroke="#a855f7" stroke-width="1.5"/>
+            <circle cx="28" cy="18" r="3" fill="#ffffff"/>
+            <defs>
+              <linearGradient id="logo-grad-1" x1="2" y1="10" x2="14" y2="26" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#0284c7"/>
+                <stop offset="1" stop-color="#0369a1"/>
+              </linearGradient>
+              <linearGradient id="logo-grad-2" x1="22" y1="10" x2="34" y2="26" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#9333ea"/>
+                <stop offset="1" stop-color="#6b21a8"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">LinkedList<span class="gradient-text">Lab</span></span>
+          <span class="brand-tag">DSA Interactive</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="nav-menu" id="nav-menu" aria-label="Primary Navigation">
+        <ul class="nav-list">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#visualizer" class="nav-link">Visualizer</a></li>
+          <li><a href="#algorithm" class="nav-link">Algorithm</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+        </ul>
+      </nav>
+
+      <!-- Quick Action / Demo Header Button -->
+      <div class="header-actions">
+        <a href="#visualizer" class="btn btn-sm btn-outline-cyan">
+          <span class="btn-icon">⚡</span> Try Visualizer
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+      <div class="container hero-container">
+        <div class="hero-badge">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          <span>LeetCode #2 &bull; Classic Linked List DSA</span>
+        </div>
+        <h1 class="hero-title">
+          Master <span class="gradient-text">Add Two Numbers</span><br>
+          Represented by Linked Lists
+        </h1>
+        <p class="hero-description">
+          An intuitive, interactive laboratory that deconstructs how numbers are stored in reverse order,
+          traversed node-by-node, added with carry propagation, and assembled into a clean result list.
+        </p>
+
+        <div class="hero-highlights">
+          <div class="highlight-item">
+            <span class="highlight-icon" aria-hidden="true">🔄</span>
+            <span>Reverse Digits ($10^0 \to 10^n$)</span>
+          </div>
+          <div class="highlight-item">
+            <span class="highlight-icon" aria-hidden="true">⚡</span>
+            <span>Node-by-Node Addition</span>
+          </div>
+          <div class="highlight-item">
+            <span class="highlight-icon" aria-hidden="true">🎯</span>
+            <span>O(max(m, n)) Linear Time</span>
+          </div>
+        </div>
+
+        <div class="hero-cta-group">
+          <a href="#visualizer" class="btn btn-primary btn-lg">
+            <span>Launch Visualizer</span>
+            <svg class="btn-arrow" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </a>
+          <a href="#algorithm" class="btn btn-secondary btn-lg">Read Algorithm</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visualizer Section -->
+    <section class="visualizer-section" id="visualizer">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Interactive Studio</span>
+          <h2 class="section-title">Linked List Addition Visualizer</h2>
+          <p class="section-desc">
+            Enter two non-negative integers or pick a preset case. Watch each number transform into a linked list
+            with the least significant digit at the head, and step through the addition algorithm node by node.
+          </p>
+        </div>
+
+        <!-- Controls Card: Inputs & Buttons -->
+        <div class="card control-card">
+          <form id="calc-form" class="calc-form" novalidate>
+            <div class="input-grid">
+              <!-- Number 1 Field -->
+              <div class="form-group">
+                <label for="num1-input" class="input-label">
+                  <span class="label-badge badge-cyan">Number 1 (l1)</span>
+                  <span class="label-hint">Least significant digit becomes Head</span>
+                </label>
+                <div class="input-wrapper">
+                  <input
+                    type="text"
+                    id="num1-input"
+                    class="number-input"
+                    placeholder="e.g. 342"
+                    autocomplete="off"
+                    inputmode="numeric"
+                    aria-describedby="num1-hint num1-error"
+                    value="342"
+                  >
+                  <button type="button" class="btn-clear-input" id="clear-num1" title="Clear Number 1" aria-label="Clear Number 1">&times;</button>
+                </div>
+                <div id="num1-error" class="input-error-msg" role="alert" aria-live="polite"></div>
+              </div>
+
+              <!-- Operator Symbol -->
+              <div class="operator-divider" aria-hidden="true">
+                <div class="operator-circle">+</div>
+              </div>
+
+              <!-- Number 2 Field -->
+              <div class="form-group">
+                <label for="num2-input" class="input-label">
+                  <span class="label-badge badge-purple">Number 2 (l2)</span>
+                  <span class="label-hint">Least significant digit becomes Head</span>
+                </label>
+                <div class="input-wrapper">
+                  <input
+                    type="text"
+                    id="num2-input"
+                    class="number-input"
+                    placeholder="e.g. 465"
+                    autocomplete="off"
+                    inputmode="numeric"
+                    aria-describedby="num2-hint num2-error"
+                    value="465"
+                  >
+                  <button type="button" class="btn-clear-input" id="clear-num2" title="Clear Number 2" aria-label="Clear Number 2">&times;</button>
+                </div>
+                <div id="num2-error" class="input-error-msg" role="alert" aria-live="polite"></div>
+              </div>
+            </div>
+
+            <!-- Global Error Banner -->
+            <div id="global-error" class="alert-banner alert-danger hidden" role="alert">
+              <span class="alert-icon">⚠️</span>
+              <span id="global-error-text">Please enter valid non-negative whole numbers.</span>
+            </div>
+
+            <!-- Example Presets & Action Buttons -->
+            <div class="controls-toolbar">
+              <!-- Example Presets -->
+              <div class="preset-group">
+                <span class="preset-label">Preset Cases:</span>
+                <div class="preset-buttons" role="group" aria-label="Example test cases">
+                  <button type="button" class="btn-preset active" data-num1="342" data-num2="465" id="btn-preset-1">
+                    <span class="preset-badge">Standard</span> 342 + 465
+                  </button>
+                  <button type="button" class="btn-preset" data-num1="999" data-num2="1" id="btn-preset-2">
+                    <span class="preset-badge">Cascading Carry</span> 999 + 1
+                  </button>
+                  <button type="button" class="btn-preset" data-num1="0" data-num2="0" id="btn-preset-3">
+                    <span class="preset-badge">Zeros</span> 0 + 0
+                  </button>
+                  <button type="button" class="btn-preset" data-num1="9999" data-num2="99" id="btn-preset-4">
+                    <span class="preset-badge">Unequal Length</span> 9999 + 99
+                  </button>
+                </div>
+              </div>
+
+              <!-- Main Action Buttons -->
+              <div class="action-buttons-group">
+                <button type="button" id="btn-reset" class="btn btn-secondary">
+                  <span class="btn-icon">↺</span> Reset
+                </button>
+                <button type="button" id="btn-step-by-step" class="btn btn-accent">
+                  <span class="btn-icon">👣</span> Step-by-Step
+                </button>
+                <button type="submit" id="btn-add-numbers" class="btn btn-primary">
+                  <span class="btn-icon">✨</span> Add Numbers
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Stepper Controller Bar (shown during step-by-step mode) -->
+        <div class="card stepper-card" id="stepper-card" aria-label="Step By Step Navigation">
+          <div class="stepper-header">
+            <div class="stepper-info">
+              <span class="stepper-step-badge" id="step-counter-badge">Step 1 of 3</span>
+              <span class="stepper-place-tag" id="step-place-tag">Processing 1s place (Units)</span>
+            </div>
+            <div class="stepper-progress-track" aria-hidden="true">
+              <div class="stepper-progress-bar" id="stepper-progress-bar" style="width: 33.3%;"></div>
+            </div>
+          </div>
+
+          <div class="stepper-controls-row">
+            <div class="stepper-nav-buttons">
+              <button type="button" id="btn-step-prev" class="btn btn-sm btn-secondary" title="Previous Step (Left Arrow)" disabled>
+                <span>⏮ Previous</span>
+              </button>
+              <button type="button" id="btn-step-play" class="btn btn-sm btn-accent" title="Auto-play all steps">
+                <span id="play-icon">▶</span> <span id="play-text">Auto Play</span>
+              </button>
+              <button type="button" id="btn-step-next" class="btn btn-sm btn-primary" title="Next Step (Right Arrow)">
+                <span>Next Step ⏭</span>
+              </button>
+            </div>
+
+            <!-- Speed control -->
+            <div class="speed-control-group">
+              <label for="speed-select" class="speed-label">Speed:</label>
+              <select id="speed-select" class="speed-select" aria-label="Animation Speed">
+                <option value="1800">Slow (1.8s)</option>
+                <option value="1000" selected>Normal (1.0s)</option>
+                <option value="500">Fast (0.5s)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step-by-Step Math Inspector Panel (The 6 required metrics) -->
+        <div class="card math-inspector-card" id="math-inspector-card">
+          <div class="inspector-header">
+            <div class="inspector-title-wrap">
+              <span class="inspector-icon" aria-hidden="true">🧮</span>
+              <h3 class="inspector-title">Active Step Calculation Inspector</h3>
+            </div>
+            <div class="inspector-equation-badge" id="step-equation-badge">
+              digit1 + digit2 + carry_in = sum
+            </div>
+          </div>
+
+          <!-- The 6 Required Step Metric Cards -->
+          <div class="metrics-grid">
+            <div class="metric-card metric-digit1" id="metric-digit1-card">
+              <span class="metric-label">1. Digit 1 (l1)</span>
+              <span class="metric-value" id="val-digit1">2</span>
+              <span class="metric-sub" id="sub-digit1">from List 1 Node</span>
+            </div>
+
+            <div class="metric-card metric-digit2" id="metric-digit2-card">
+              <span class="metric-label">2. Digit 2 (l2)</span>
+              <span class="metric-value" id="val-digit2">5</span>
+              <span class="metric-sub" id="sub-digit2">from List 2 Node</span>
+            </div>
+
+            <div class="metric-card metric-carry-in" id="metric-carry-in-card">
+              <span class="metric-label">3. Carry-In</span>
+              <span class="metric-value" id="val-carry-in">0</span>
+              <span class="metric-sub" id="sub-carry-in">carried from previous</span>
+            </div>
+
+            <div class="metric-card metric-sum" id="metric-sum-card">
+              <span class="metric-label">4. Sum (d1 + d2 + c_in)</span>
+              <span class="metric-value" id="val-sum">7</span>
+              <span class="metric-sub" id="sub-sum">total at this position</span>
+            </div>
+
+            <div class="metric-card metric-output-digit" id="metric-output-digit-card">
+              <span class="metric-label">5. Output Digit (sum % 10)</span>
+              <span class="metric-value" id="val-output-digit">7</span>
+              <span class="metric-sub" id="sub-output-digit">new node value</span>
+            </div>
+
+            <div class="metric-card metric-carry-out" id="metric-carry-out-card">
+              <span class="metric-label">6. Carry-Out (⌊sum / 10⌋)</span>
+              <span class="metric-value" id="val-carry-out">0</span>
+              <span class="metric-sub" id="sub-carry-out">passes to next step</span>
+            </div>
+          </div>
+
+          <!-- Step Narrative Explanation -->
+          <div class="step-narrative" id="step-narrative">
+            <span class="narrative-badge">Explanation</span>
+            <p id="step-narrative-text" class="narrative-text">
+              Adding units column: <strong>2</strong> (from List 1) + <strong>5</strong> (from List 2) + <strong>0</strong> (carry-in) = <strong>7</strong>.
+              Creating a new result node with digit <strong>7</strong>. Carry for next column is <strong>0</strong>.
+            </p>
+          </div>
+        </div>
+
+        <!-- Linked List Visualizer Arena -->
+        <div class="card visualizer-arena-card">
+          <div class="arena-header">
+            <h3 class="arena-title">
+              <span class="arena-icon" aria-hidden="true">🔗</span>
+              <span>Linked List Node Chains (Reverse Digit Order)</span>
+            </h3>
+            <div class="arena-legend">
+              <span class="legend-item"><span class="legend-color legend-cyan"></span> List 1 (l1)</span>
+              <span class="legend-item"><span class="legend-color legend-purple"></span> List 2 (l2)</span>
+              <span class="legend-item"><span class="legend-color legend-emerald"></span> Result List</span>
+              <span class="legend-item"><span class="legend-color legend-active"></span> Active Nodes</span>
+            </div>
+          </div>
+
+          <!-- Visualizer Chain: List 1 -->
+          <div class="list-display-section" id="list1-section">
+            <div class="list-meta-bar">
+              <div class="list-meta-left">
+                <span class="list-name-badge badge-cyan">List 1 (l1)</span>
+                <span class="list-original-text">Original: <strong id="list1-original-val">342</strong></span>
+              </div>
+              <span class="list-role-tag">Head = Least Significant Digit ($10^0$)</span>
+            </div>
+            <div class="nodes-scroll-container" id="list1-nodes-container" tabindex="0" aria-label="List 1 nodes">
+              <!-- Nodes injected via script.js -->
+            </div>
+          </div>
+
+          <!-- Visualizer Chain: List 2 -->
+          <div class="list-display-section" id="list2-section">
+            <div class="list-meta-bar">
+              <div class="list-meta-left">
+                <span class="list-name-badge badge-purple">List 2 (l2)</span>
+                <span class="list-original-text">Original: <strong id="list2-original-val">465</strong></span>
+              </div>
+              <span class="list-role-tag">Head = Least Significant Digit ($10^0$)</span>
+            </div>
+            <div class="nodes-scroll-container" id="list2-nodes-container" tabindex="0" aria-label="List 2 nodes">
+              <!-- Nodes injected via script.js -->
+            </div>
+          </div>
+
+          <div class="addition-separator" aria-hidden="true">
+            <div class="sep-line"></div>
+            <div class="sep-badge">Addition Result</div>
+            <div class="sep-line"></div>
+          </div>
+
+          <!-- Visualizer Chain: Result List -->
+          <div class="list-display-section list-result-section" id="result-list-section">
+            <div class="list-meta-bar">
+              <div class="list-meta-left">
+                <span class="list-name-badge badge-emerald">Result List</span>
+                <span class="list-original-text">Decimal Sum: <strong id="result-sum-val" class="gradient-text">807</strong></span>
+              </div>
+              <span class="list-role-tag">Built Node-by-Node with Carry Propagation</span>
+            </div>
+            <div class="nodes-scroll-container" id="result-nodes-container" tabindex="0" aria-label="Result List nodes">
+              <!-- Result nodes injected via script.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Result Summary Card -->
+        <div class="card result-card" id="result-summary-card">
+          <div class="result-header">
+            <div class="result-title-group">
+              <span class="result-icon-badge" aria-hidden="true">🎉</span>
+              <div>
+                <h3 class="result-heading">Calculation Complete</h3>
+                <span class="result-subheading">Linked list traversal finished successfully</span>
+              </div>
+            </div>
+            <div class="result-status-tag" id="result-status-tag">Status: Completed</div>
+          </div>
+
+          <div class="result-body-grid">
+            <!-- Math Equation Box -->
+            <div class="result-stat-box math-box">
+              <span class="stat-label">Full Decimal Equation</span>
+              <div class="stat-equation">
+                <span id="res-num1">342</span> + <span id="res-num2">465</span> = <strong id="res-total" class="highlight-total">807</strong>
+              </div>
+              <span class="stat-hint" id="res-reconstruction-text">Reconstructed by reading nodes from head to tail in reverse: 7 &rarr; 0 &rarr; 8 = 807</span>
+            </div>
+
+            <!-- Result Linked List Formula -->
+            <div class="result-stat-box">
+              <span class="stat-label">Result Linked List (Head &rarr; Tail)</span>
+              <div class="result-chain-preview" id="result-chain-preview">
+                7 &rarr; 0 &rarr; 8 &rarr; NULL
+              </div>
+              <span class="stat-hint">Each node stores one base-10 digit</span>
+            </div>
+
+            <!-- Node Stats -->
+            <div class="result-stat-box">
+              <span class="stat-label">Execution Metrics</span>
+              <div class="metrics-pill-list">
+                <span class="metric-pill">Steps: <strong id="stat-steps">3</strong></span>
+                <span class="metric-pill">Nodes Created: <strong id="stat-nodes">3</strong></span>
+                <span class="metric-pill">Final Carry: <strong id="stat-carry">0</strong></span>
+                <span class="metric-pill">Time: <strong id="stat-time">O(max(m, n))</strong></span>
+              </div>
+              <span class="stat-hint">One single pass without backtracking</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Algorithm & Complexity Section -->
+    <section class="algorithm-section" id="algorithm">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Deep Dive & Technical Analysis</span>
+          <h2 class="section-title">The Standard Linked List Addition Algorithm</h2>
+          <p class="section-desc">
+            Explore the exact algorithm used in top technical interviews, why reverse digit storage simplifies arithmetic,
+            and how to handle edge cases like unequal lengths and final carries.
+          </p>
+        </div>
+
+        <div class="algo-grid">
+          <!-- Column 1: Core Concept & Steps -->
+          <div class="card algo-card">
+            <h3 class="card-title">
+              <span class="card-icon" aria-hidden="true">💡</span>
+              <span>Why Reverse Order?</span>
+            </h3>
+            <p class="card-text">
+              In standard elementary school arithmetic, we add numbers starting from the <strong>rightmost digits</strong> (the units place $10^0$)
+              and proceed leftward, carrying over any overflow ($\ge 10$) to the next higher place value ($10^1, 10^2, \dots$).
+            </p>
+            <p class="card-text">
+              Singly linked lists can only be traversed forward in $O(1)$ from head to tail. By storing numbers with the
+              <strong>least significant digit at the head</strong>:
+            </p>
+            <ul class="concept-list">
+              <li>
+                <strong>Immediate Alignment:</strong> Both list heads correspond to the units place ($10^0$). No list reversal or recursion needed!
+              </li>
+              <li>
+                <strong>Natural Carry Propagation:</strong> As we advance <code>curr = curr.next</code>, we naturally move to the next higher power of 10.
+              </li>
+              <li>
+                <strong>Arbitrary Precision:</strong> Can add numbers with 100+ digits without standard integer 64-bit overflow!
+              </li>
+            </ul>
+
+            <div class="callout-box">
+              <span class="callout-title">🔑 The Dummy Head Technique</span>
+              <p class="callout-text">
+                Using a dummy head node (<code>const dummy = new ListNode(0)</code>) avoids special-casing the insertion of the very first node,
+                simplifying list construction and preventing null pointer errors. At the end, simply return <code>dummy.next</code>.
+              </p>
+            </div>
+          </div>
+
+          <!-- Column 2: Step-by-Step Logic -->
+          <div class="card algo-card">
+            <h3 class="card-title">
+              <span class="card-icon" aria-hidden="true">📋</span>
+              <span>Algorithmic Invariants</span>
+            </h3>
+
+            <div class="steps-timeline">
+              <div class="timeline-step">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                  <strong>Initialize Pointers and Carry:</strong>
+                  <p>Create a <code>dummy</code> node, set <code>curr = dummy</code>, and set <code>carry = 0</code>.</p>
+                </div>
+              </div>
+
+              <div class="timeline-step">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  <strong>Traverse While Active:</strong>
+                  <p>Loop while <code>l1 !== null || l2 !== null || carry !== 0</code>. Notice the condition includes <code>carry !== 0</code> so that a final leftover carry generates an additional node!</p>
+                </div>
+              </div>
+
+              <div class="timeline-step">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <strong>Extract Digits & Compute Sum:</strong>
+                  <p><code>v1 = l1 ? l1.val : 0</code> and <code>v2 = l2 ? l2.val : 0</code>.<br>
+                  Then: <code>sum = v1 + v2 + carry</code>.</p>
+                </div>
+              </div>
+
+              <div class="timeline-step">
+                <span class="step-num">4</span>
+                <div class="step-content">
+                  <strong>Update Carry and Append Node:</strong>
+                  <p><code>carry = Math.floor(sum / 10)</code>.<br>
+                  <code>curr.next = new ListNode(sum % 10)</code>; advance <code>curr = curr.next</code>.</p>
+                </div>
+              </div>
+
+              <div class="timeline-step">
+                <span class="step-num">5</span>
+                <div class="step-content">
+                  <strong>Advance Input Pointers:</strong>
+                  <p>Advance <code>l1 = l1.next</code> (if not null) and <code>l2 = l2.next</code> (if not null).</p>
+                </div>
+              </div>
+
+              <div class="timeline-step">
+                <span class="step-num">6</span>
+                <div class="step-content">
+                  <strong>Return Result:</strong>
+                  <p>Return <code>dummy.next</code>, which is the head of the newly constructed sum list.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code Implementation & Pseudocode Tabs -->
+        <div class="card code-section-card">
+          <div class="code-card-header">
+            <div class="code-tabs" role="tablist" aria-label="Code language tabs">
+              <button type="button" class="code-tab active" role="tab" aria-selected="true" id="tab-btn-pseudocode" data-target="code-pseudocode">
+                Pseudocode
+              </button>
+              <button type="button" class="code-tab" role="tab" aria-selected="false" id="tab-btn-javascript" data-target="code-javascript">
+                JavaScript (Standard Solution)
+              </button>
+            </div>
+            <button type="button" class="btn-copy-code" id="btn-copy-code" title="Copy code to clipboard">
+              <span id="copy-icon">📋</span> <span id="copy-text">Copy Code</span>
+            </button>
+          </div>
+
+          <div class="code-tab-panels">
+            <!-- Pseudocode Panel -->
+            <div class="code-panel active" id="code-pseudocode" role="tabpanel" aria-labelledby="tab-btn-pseudocode">
+              <pre class="code-block"><code class="language-pseudocode"><span class="token-comment">// Standard LeetCode #2: Add Two Numbers Represented by Linked Lists</span>
+<span class="token-keyword">function</span> <span class="token-func">addTwoNumbers</span>(l1: ListNode, l2: ListNode): ListNode {
+    <span class="token-comment">// Step 1: Create a dummy head to anchor the result list</span>
+    <span class="token-keyword">let</span> dummy = <span class="token-keyword">new</span> ListNode(0)
+    <span class="token-keyword">let</span> curr = dummy
+    <span class="token-keyword">let</span> carry = 0
+
+    <span class="token-comment">// Step 2: Loop while any list has nodes OR carry is non-zero</span>
+    <span class="token-keyword">while</span> (l1 <span class="token-operator">!=</span> <span class="token-constant">NULL</span> <span class="token-operator">||</span> l2 <span class="token-operator">!=</span> <span class="token-constant">NULL</span> <span class="token-operator">||</span> carry <span class="token-operator">&gt;</span> 0) {
+        <span class="token-comment">// Step 3: Extract digits (substitute 0 if list is exhausted)</span>
+        <span class="token-keyword">let</span> digit1 = (l1 <span class="token-operator">!=</span> <span class="token-constant">NULL</span>) <span class="token-operator">?</span> l1.val : 0
+        <span class="token-keyword">let</span> digit2 = (l2 <span class="token-operator">!=</span> <span class="token-constant">NULL</span>) <span class="token-operator">?</span> l2.val : 0
+
+        <span class="token-comment">// Step 4: Calculate sum and new carry</span>
+        <span class="token-keyword">let</span> totalSum = digit1 + digit2 + carry
+        carry = <span class="token-func">floor</span>(totalSum / 10)
+        <span class="token-keyword">let</span> outputDigit = totalSum % 10
+
+        <span class="token-comment">// Step 5: Append new node and advance pointers</span>
+        curr.next = <span class="token-keyword">new</span> ListNode(outputDigit)
+        curr = curr.next
+
+        <span class="token-keyword">if</span> (l1 <span class="token-operator">!=</span> <span class="token-constant">NULL</span>) l1 = l1.next
+        <span class="token-keyword">if</span> (l2 <span class="token-operator">!=</span> <span class="token-constant">NULL</span>) l2 = l2.next
+    }
+
+    <span class="token-comment">// Step 6: Return the result list starting after the dummy head</span>
+    <span class="token-keyword">return</span> dummy.next
+}</code></pre>
+            </div>
+
+            <!-- JavaScript Panel -->
+            <div class="code-panel" id="code-javascript" role="tabpanel" aria-labelledby="tab-btn-javascript" hidden>
+              <pre class="code-block"><code class="language-javascript"><span class="token-comment">/**
+ * Definition for singly-linked list node.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */</span>
+
+<span class="token-keyword">class</span> <span class="token-class">ListNode</span> {
+  <span class="token-keyword">constructor</span>(val = 0, next = <span class="token-constant">null</span>) {
+    <span class="token-keyword">this</span>.val = val;
+    <span class="token-keyword">this</span>.next = next;
+  }
+}
+
+<span class="token-keyword">function</span> <span class="token-func">addTwoNumbers</span>(l1, l2) {
+  <span class="token-keyword">const</span> dummyHead = <span class="token-keyword">new</span> <span class="token-func">ListNode</span>(0);
+  <span class="token-keyword">let</span> current = dummyHead;
+  <span class="token-keyword">let</span> carry = 0;
+
+  <span class="token-keyword">while</span> (l1 !== <span class="token-constant">null</span> || l2 !== <span class="token-constant">null</span> || carry !== 0) {
+    <span class="token-keyword">const</span> val1 = l1 !== <span class="token-constant">null</span> ? l1.val : 0;
+    <span class="token-keyword">const</span> val2 = l2 !== <span class="token-constant">null</span> ? l2.val : 0;
+    
+    <span class="token-keyword">const</span> sum = val1 + val2 + carry;
+    carry = Math.<span class="token-func">floor</span>(sum / 10);
+    
+    current.next = <span class="token-keyword">new</span> <span class="token-func">ListNode</span>(sum % 10);
+    current = current.next;
+
+    <span class="token-keyword">if</span> (l1 !== <span class="token-constant">null</span>) l1 = l1.next;
+    <span class="token-keyword">if</span> (l2 !== <span class="token-constant">null</span>) l2 = l2.next;
+  }
+
+  <span class="token-keyword">return</span> dummyHead.next;
+}</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- Complexity Analysis Cards -->
+        <div class="complexity-grid">
+          <!-- Time Complexity Card -->
+          <div class="card complexity-card">
+            <div class="complexity-header">
+              <span class="complexity-badge badge-cyan">Time Complexity</span>
+              <span class="complexity-notation">O(max(m, n))</span>
+            </div>
+            <p class="complexity-desc">
+              Where <strong>m</strong> and <strong>n</strong> represent the number of nodes (digits) in List 1 and List 2 respectively.
+            </p>
+            <ul class="complexity-reasons">
+              <li>
+                <strong>Single Simultaneous Pass:</strong> The algorithm executes exactly $\max(m, n)$ iterations when there is no carry-out at the highest place value, or $\max(m, n) + 1$ iterations when a final carry occurs (e.g. $999 + 1 = 1000$).
+              </li>
+              <li>
+                <strong>Constant Time per Step:</strong> Node value access, addition, division, modulo, and pointer updates take strictly $O(1)$ constant time per iteration.
+              </li>
+              <li>
+                <strong>Total Bound:</strong> $\max(m, n) + 1 \in \mathcal{O}(\max(m, n))$, which is optimal because every digit must be inspected at least once.
+              </li>
+            </ul>
+          </div>
+
+          <!-- Space Complexity Card -->
+          <div class="card complexity-card">
+            <div class="complexity-header">
+              <span class="complexity-badge badge-purple">Space Complexity</span>
+              <span class="complexity-notation">O(max(m, n))</span>
+            </div>
+            <p class="complexity-desc">
+              The length of the newly created result linked list is at most $\max(m, n) + 1$.
+            </p>
+            <ul class="complexity-reasons">
+              <li>
+                <strong>Output Space:</strong> We allocate memory for a new linked list containing exactly $\max(m, n)$ nodes (or $\max(m, n) + 1$ nodes if a final carry generates a new leading digit).
+              </li>
+              <li>
+                <strong>Auxiliary Space:</strong> Aside from the required output list nodes, only a constant number of pointer variables (<code>dummy</code>, <code>curr</code>, <code>carry</code>, <code>val1</code>, <code>val2</code>) are maintained, using $O(1)$ extra auxiliary memory.
+              </li>
+              <li>
+                <strong>Total Space:</strong> $\mathcal{O}(\max(m, n))$ total space.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">About This Tool</span>
+          <h2 class="section-title">Designed for DSA Learners & Educators</h2>
+          <p class="section-desc">
+            LinkedList Lab was crafted to eliminate the confusion beginners face with pointer manipulation,
+            dummy head nodes, and carry bookkeeping in singly linked lists.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="card about-card">
+            <div class="about-icon" aria-hidden="true">🎯</div>
+            <h4 class="about-card-title">Clear Mental Models</h4>
+            <p class="about-card-text">
+              Abstract pointer updates become tangible visual connections. Seeing how <code>NULL</code> is handled when list lengths differ cements understanding for technical interviews.
+            </p>
+          </div>
+
+          <div class="card about-card">
+            <div class="about-icon" aria-hidden="true">🔬</div>
+            <h4 class="about-card-title">Real Node-by-Node Execution</h4>
+            <p class="about-card-text">
+              No mathematical shortcuts: this application converts digit strings into actual JavaScript <code>ListNode</code> references and executes standard pointer traversal.
+            </p>
+          </div>
+
+          <div class="card about-card">
+            <div class="about-icon" aria-hidden="true">⚡</div>
+            <h4 class="about-card-title">Zero Dependencies</h4>
+            <p class="about-card-text">
+              Built exclusively with vanilla HTML5, modern CSS3, and standard ECMAScript. Runs seamlessly in any modern browser without npm builds, Node servers, or bundlers.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-left">
+        <div class="footer-logo">
+          <span class="footer-logo-text">LinkedList<span class="gradient-text">Lab</span></span>
+        </div>
+        <p class="footer-subtext">Interactive Data Structures & Algorithms Visualizer</p>
+      </div>
+
+      <div class="footer-badge-wrap">
+        <div class="footer-built-badge">
+          <span class="footer-heart" aria-hidden="true">💙</span>
+          <span>Built for DSA Learning</span>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <a href="#home" class="footer-link">Home</a>
+        <a href="#visualizer" class="footer-link">Visualizer</a>
+        <a href="#algorithm" class="footer-link">Algorithm</a>
+        <a href="#about" class="footer-link">About</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
